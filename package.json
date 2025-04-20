@@ -1,0 +1,17 @@
+{
+  "name": "asyncapi-electron-lab",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@asyncapi/parser": "^1.15.0",
+    "axios": "^1.6.0",
+    "electron": "^29.0.0",
+    "kafkajs": "^2.2.4",
+    "mqtt": "^5.3.3",
+    "ws": "^8.13.0",
+    "yaml": "^2.3.4"
+  }
+}

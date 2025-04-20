@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AsyncAPI Electron Lab</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h2 {
+      margin-bottom: 10px;
+    }
+    button {
+      margin: 10px 10px 0 0;
+      padding: 10px 20px;
+    }
+    #logBox {
+      margin-top: 20px;
+      height: 350px;
+      overflow-y: auto;
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 10px;
+      font-family: monospace;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+<h2>Pandya Protocol Tester</h2>
+<button onclick="send('http')">Test HTTP</button>
+<button onclick="send('mqtt')">Test MQTT</button>
+<button onclick="send('ws')">Test WebSocket</button>
+<button onclick="send('kafka')">Test Kafka</button>
+
+<div id="logBox"></div>
+
+<script>
+  const { ipcRenderer } = require('electron');
+  const logBox = document.getElementById('logBox');
+
+  function log(msg) {
+    logBox.textContent += `${msg}\n`;
+    logBox.scrollTop = logBox.scrollHeight;
+  }
+
+  async function send(protocol) {
+    try {
+      log(`\n>>> [${protocol.toUpperCase()}] test initiated`);
+      await ipcRenderer.invoke(protocol);
+    } catch (err) {
+      log(`[Error] ${err.message}`);
+    }
+  }
+
+  ipcRenderer.on('log', (_, msg) => {
+    log(msg);
+  });
+</script>
+</body>
+</html>

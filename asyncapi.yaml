@@ -1,0 +1,42 @@
+asyncapi: '2.6.0'
+info:
+  title: Pandya Protocol Tester
+  version: '1.0.0'
+servers:
+  kafkaServer:
+    protocol: kafka
+    url: localhost:9092
+  mqttServer:
+    protocol: mqtt
+    url: ws://broker.hivemq.com:8000/mqtt
+  wsServer:
+    protocol: ws
+    url: wss://echo.websocket.events
+channels:
+  kafka/pandya-topic:
+    publish:
+      message:
+        payload:
+          type: string
+    subscribe:
+      message:
+        payload:
+          type: string
+  mqtt/test/pandya:
+    publish:
+      message:
+        payload:
+          type: string
+    subscribe:
+      message:
+        payload:
+          type: string
+  ws/echo:
+    publish:
+      message:
+        payload:
+          type: string
+    subscribe:
+      message:
+        payload:
+          type: string
